@@ -49,14 +49,14 @@ public class Cell {
 	{
 		this.c = c;
 	}
-	@Override
+	
 	public String toString()
 	{
 		String string = new String();
 		if(this.isWall())
-			string += "1";
+			string += "#";
 		else
-			string += "0";
+			string += " ";
 		return string;
 	}
 
