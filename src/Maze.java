@@ -25,7 +25,7 @@ public class Maze {
 		
 	}
 	
-	void makePath(int r, int c)
+	public void makePath(int r, int c)
 	{
 		if(!this.maze[r][c].isVisited())
 		{
@@ -80,7 +80,6 @@ public class Maze {
 	}
 	
 	
-	@Override
 	public String toString()
 	{
 		String string = new String();
@@ -93,11 +92,5 @@ public class Maze {
 		return string;
 	}
 	
-	public static void main(String[] args)
-	{
-		Maze maze = new Maze(11,21);
-		maze.makePath(1, 1);
-		System.out.println(maze.toString());
-	}
 
 }
