@@ -15,6 +15,14 @@ public class Maze {
 		for(int i = 0; i < R; i++)
 			for(int j = 0; j < C; j++)
 				maze[i][j] = new Cell(i, j);
+		for (int i = 0; i < R; i++)
+			for (int j = 0; j < C; j++)
+			{
+				maze[i][j].setR(i);
+				maze[i][j].setC(j);
+				if (i % 2 == 0 || j % 2 == 0)
+					maze[i][j].setWall(false);
+			}
 		
 	}
 	
@@ -75,8 +83,8 @@ public class Maze {
 	
 	public static void main(String[] args)
 	{
-		Maze maze = new Maze(10,10);
-		
+		Maze maze = new Maze(11,21);
+		System.out.println(maze.toString());
 	}
 
 }
