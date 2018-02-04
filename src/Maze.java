@@ -14,15 +14,14 @@ public class Maze {
 		maze = new Cell[R][C];
 		for(int i = 0; i < R; i++)
 			for(int j = 0; j < C; j++)
-				maze[i][j] = new Cell(i, j);
-		for (int i = 0; i < R; i++)
-			for (int j = 0; j < C; j++)
 			{
+				maze[i][j] = new Cell(i, j);
 				maze[i][j].setR(i);
 				maze[i][j].setC(j);
 				if (i % 2 == 0 || j % 2 == 0)
-					maze[i][j].setWall(false);
+					maze[i][j].setWall(true);
 			}
+
 		
 	}
 	
@@ -81,9 +80,23 @@ public class Maze {
 	}
 	
 	
+	@Override
+	public String toString()
+	{
+		String string = new String();
+		for(int i = 0; i < R; i++)
+		{
+			for(int j = 0; j < C; j++)
+				string += this.maze[i][j].toString();
+			string += '\n';
+		}
+		return string;
+	}
+	
 	public static void main(String[] args)
 	{
 		Maze maze = new Maze(11,21);
+		maze.makePath(1, 1);
 		System.out.println(maze.toString());
 	}
 
