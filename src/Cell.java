@@ -49,6 +49,7 @@ public class Cell {
 	{
 		this.c = c;
 	}
+	@Override
 	public String toString()
 	{
 		String string = new String();
