@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.Collections;
+
 public class Maze {
 	
 	int R;
@@ -15,11 +18,65 @@ public class Maze {
 		
 	}
 	
+	void makePath(int r, int c)
+	{
+		if(!this.maze[r][c].isVisited())
+		{
+			this.maze[r][c].setVisited(true);
+			ArrayList<Cell> cellList= new ArrayList<>(9);
+			
+			if (r - 2 >= 0 && r < R)
+				cellList.add(maze[r - 2][c]);
+			if(r+2 < R && r >= 0)
+				cellList.add(maze[r + 2][c]);
+			if(c - 2 >= 0 && c < C)
+				cellList.add(maze[r][c - 2]);
+			if (c + 2 < C && c >= 0)
+				cellList.add(maze[r][c + 2]);
+			
+			Collections.shuffle(cellList);
+			
+			for(Cell cell : cellList)
+			{
+				if(!cell.isVisited())
+				{
+					if (r + 2 == cell.getR())
+					{
+						maze[r + 1][c].setWall(false);
+						makePath(cell.getR(), cell.getC());
+					}
+					if (r - 2 == cell.getR())
+					{
+						maze[r - 1][c].setWall(false);
+						makePath(cell.getR(), cell.getC());
+					}
+					if (c + 2 == cell.getC())
+					{
+						maze[r][c + 1].setWall(false);
+						makePath(cell.getR(), cell.getC());
+					}
+					if (c - 2 == cell.getC())
+					{
+						maze[r][c - 1].setWall(false);
+						makePath(cell.getR(), cell.getC());
+					}
+					
+				}
+			}
+			
+			
+			
+			
+			
+			
+		}
+	}
+	
 	
 	public static void main(String[] args)
 	{
 		Maze maze = new Maze(10,10);
-		System.out.println("heh|");
+		
 	}
 
 }
