@@ -40,13 +40,22 @@ public class Cell {
 	{
 		return c;
 	}
+	public void setR(int r)
+	{
+		this.r = r;
+	}
+	
+	public void setC(int c)
+	{
+		this.c = c;
+	}
 	public String toString()
 	{
 		String string = new String();
 		if(this.isWall())
-			string += ((char) 219);
+			string += "1";
 		else
-			string += " ";
+			string += "0";
 		return string;
 	}
 
