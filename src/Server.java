@@ -4,7 +4,7 @@ import java.net.Socket;
 
 public class Server {
 	
-	static Maze maze = new Maze(21,21);
+	static Maze maze = new Maze(41,41);
 	
 	public static void main(String[] args)
 	{
