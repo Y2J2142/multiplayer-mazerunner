@@ -44,43 +44,23 @@ public class FxClient extends Application {
                     text.setText(keyCode.toString());
                     if (keyCode.equals(KeyCode.DOWN))
                     {
-                        try{
-                            out.println("d");
-                            System.out.println(in.readLine());
-                        }catch(IOException e) {
-                        e.printStackTrace();
-                        }
-                        
+                        out.println("d");
+                        readMaze(41, in);  
                     }
                     else if (keyCode.equals(KeyCode.UP))
                     {
-                        try{
-                            out.println("u");
-                            System.out.println(in.readLine());
-                        }catch(IOException e) {
-                        e.printStackTrace();
-                        }
-                        
+                        out.println("u");
+                        readMaze(41, in);   
                     }
                     else if (keyCode.equals(KeyCode.LEFT))
                     {
-                        try{
-                            out.println("l");
-                            System.out.println(in.readLine());
-                        }catch(IOException e) {
-                        e.printStackTrace();
-                        }
-                        
+                        out.println("l");
+                        readMaze(41, in);           
                     }
                     else if (keyCode.equals(KeyCode.RIGHT))
                     {
-                        try{
-                            out.println("r");
-                            System.out.println(in.readLine());
-                        }catch(IOException e) {
-                        e.printStackTrace();
-                        }
-                        
+                        out.println("r");
+                        readMaze(41, in);
                     }
                 }
 
@@ -100,5 +80,23 @@ public class FxClient extends Application {
             e.printStackTrace();
         }
     }
+
+void readMaze(int size, BufferedReader in)
+{
+    for(int i = 0; i <=size; i++)
+    {
+        try{
+
+        String fromServer = new String();
+        fromServer = in.readLine();
+        System.out.println(fromServer);
+        }catch(IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+}
+
 
 }

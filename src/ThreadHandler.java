@@ -32,22 +32,22 @@ public void run()
 			if(fromClient.equals("l"))
 			{
 				writer.print("\033[H\033[2J");
-				writer.println("left");
+				sendMaze(writer);
 			}
 			if(fromClient.equals("r"))
 			{
 				writer.print("\033[H\033[2J");
-				writer.println("right");
+				sendMaze(writer);
 			}
 			if(fromClient.equals("u"))
 			{
 				writer.print("\033[H\033[2J");
-				writer.println("up");
+				sendMaze(writer);
 			}
 			if(fromClient.equals("d"))
 			{
 				writer.print("\033[H\033[2J");
-				writer.println("down");
+				sendMaze(writer);
 			}
 			
 			
@@ -61,4 +61,11 @@ public void run()
 		
 	
 }
+
+void sendMaze(PrintWriter writer)
+{
+	writer.println(this.maze.toString());
+}
+
+
 }
