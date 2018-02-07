@@ -5,76 +5,102 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.List;
 
-public class ThreadHandler extends Thread{
-Socket client;
-int id;
-Maze maze;
-Player player;
-List<Player> playerList;
-ThreadHandler(Socket client, int id, Maze maze, List<Player> playerList)
-{
-	this.client = client;
-	this.id = id;
-	this.maze = maze;
-	this.player = new Player(1, 1, id, maze);
-	this.playerList = playerList;
-	this.playerList.add(this.player);
-}
 
-public void run()
-{
-	try {
-		PrintWriter writer = new PrintWriter(client.getOutputStream(), true);
-		BufferedReader reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
-		String fromClient = new String();
-		writer.println(maze.toString());
-		while(true)
-		{
-			
-			
-			fromClient = reader.readLine().trim();
+public class ThreadHandler extends Thread {
+	Socket client;
+	int id;
+	Maze maze;
+	Player player;
+	List<Player> playerList;
 
-			if(fromClient.equals("l"))
-			{
-				writer.print("\033[H\033[2J");
-				player.moveLeft();
-				sendMaze(writer);
+	ThreadHandler(Socket client, int id, Maze maze, List<Player> playerList) {
+		this.client = client;
+		this.id = id;
+		this.maze = maze;
+		this.player = new Player(1, 1, id, maze);
+		playerList.add(this.player);
+		this.playerList = playerList;
+		
+	}
+
+	public void run() {
+		try {
+			PrintWriter writer = new PrintWriter(client.getOutputStream(), true);
+			BufferedReader reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
+			String fromClient = new String();
+			writer.println(maze.toString());
+			while (true) {
+
+				fromClient = reader.readLine().trim();
+
+				if (fromClient.equals("l")) {
+					writer.print("\033[H\033[2J");
+					player.moveLeft();
+					sendMaze(writer);
+				}
+				if (fromClient.equals("r")) {
+					writer.print("\033[H\033[2J");
+					player.moveRight();
+					sendMaze(writer);
+				}
+				if (fromClient.equals("u")) {
+					writer.print("\033[H\033[2J");
+					player.moveUp();
+					sendMaze(writer);
+				}
+				if (fromClient.equals("d")) {
+					writer.print("\033[H\033[2J");
+					player.moveDown();
+					sendMaze(writer);
+				}
+
 			}
-			if(fromClient.equals("r"))
-			{
-				writer.print("\033[H\033[2J");
-				player.moveRight();
-				sendMaze(writer);
-			}
-			if(fromClient.equals("u"))
-			{
-				writer.print("\033[H\033[2J");
-				player.moveUp();
-				sendMaze(writer);
-			}
-			if(fromClient.equals("d"))
-			{
-				writer.print("\033[H\033[2J");
-				player.moveDown();
-				sendMaze(writer);
-			}
-			
-			
-		}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
-		
-	
-}
 
-void sendMaze(PrintWriter writer)
-{
-	writer.println(this.maze.toString());
-}
+	}
 
+	void sendMaze(PrintWriter writer) {
+		writer.println(this.playerMaze());
+	}
+
+	String playerMaze() {
+		String string = new String();
+		for (int i = 0; i < this.maze.getR(); i++) 
+		{
+			for (int j = 0; j < this.maze.getC(); j++) 
+			{
+				boolean playerDrawn = false;
+				for (Player p : playerList) 
+				{
+					if (i == player.getX() && j == player.getY() && !playerDrawn)
+					{
+						string += "0";
+						playerDrawn = true;
+					}
+					else if(i == p.getX() && j == p.getY() && !playerDrawn)
+					{
+						if(p.getID() == this.id)
+						{
+							playerDrawn = true;
+							break;
+						} 
+						string+= "1";
+						playerDrawn = true;
+					}
+					else if(!playerDrawn)
+					{
+						string += this.maze.maze[i][j].toString();
+						playerDrawn = true;
+					}
+				}
+			}
+			string += '\n';
+		}
+		return string;
+
+	}
 
 }
