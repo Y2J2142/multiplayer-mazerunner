@@ -32,21 +32,25 @@ public void run()
 			if(fromClient.equals("l"))
 			{
 				writer.print("\033[H\033[2J");
+				player.moveLeft();
 				sendMaze(writer);
 			}
 			if(fromClient.equals("r"))
 			{
 				writer.print("\033[H\033[2J");
+				player.moveRight();
 				sendMaze(writer);
 			}
 			if(fromClient.equals("u"))
 			{
 				writer.print("\033[H\033[2J");
+				player.moveUp();
 				sendMaze(writer);
 			}
 			if(fromClient.equals("d"))
 			{
 				writer.print("\033[H\033[2J");
+				player.moveDown();
 				sendMaze(writer);
 			}
 			
