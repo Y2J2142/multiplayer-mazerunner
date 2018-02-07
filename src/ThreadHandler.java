@@ -22,20 +22,33 @@ public void run()
 		PrintWriter writer = new PrintWriter(client.getOutputStream(), true);
 		BufferedReader reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
 		String fromClient = new String();
+		writer.println(maze.toString());
 		while(true)
 		{
 			
-			writer.println(maze.toString());
+			
 			fromClient = reader.readLine().trim();
 
 			if(fromClient.equals("l"))
+			{
+				writer.print("\033[H\033[2J");
 				writer.println("left");
+			}
 			if(fromClient.equals("r"))
+			{
+				writer.print("\033[H\033[2J");
 				writer.println("right");
+			}
 			if(fromClient.equals("u"))
+			{
+				writer.print("\033[H\033[2J");
 				writer.println("up");
+			}
 			if(fromClient.equals("d"))
+			{
+				writer.print("\033[H\033[2J");
 				writer.println("down");
+			}
 			
 			
 		}
