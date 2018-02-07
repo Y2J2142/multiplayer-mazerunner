@@ -1,14 +1,17 @@
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-
+import java.util.ArrayList;
+import java.util.List;
 public class Server {
 	
 	static Maze maze = new Maze(41,41);
+	static List<Player> playerList;
 	
 	public static void main(String[] args)
 	{
 		maze.makePath(1,1);
+		playerList = new ArrayList<>();
 	
 			int id = 0;
 			ServerSocket server;
@@ -18,7 +21,7 @@ public class Server {
 			while(true)
 			{
 				Socket client = server.accept();
-				ThreadHandler handler = new ThreadHandler(client, id++, maze);
+				ThreadHandler handler = new ThreadHandler(client, id++, maze, playerList);
 				handler.start();
 			}
 			} catch (NumberFormatException | IOException e) {
