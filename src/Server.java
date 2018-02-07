@@ -2,7 +2,10 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Vector;
+import java.util.Collections;
 public class Server {
 	
 	static Maze maze = new Maze(41,41);
@@ -11,8 +14,7 @@ public class Server {
 	public static void main(String[] args)
 	{
 		maze.makePath(1,1);
-		playerList = new ArrayList<>();
-	
+		playerList = Collections.synchronizedList(new ArrayList<>());	
 			int id = 0;
 			ServerSocket server;
 			try {
@@ -23,6 +25,7 @@ public class Server {
 				Socket client = server.accept();
 				ThreadHandler handler = new ThreadHandler(client, id++, maze, playerList);
 				handler.start();
+				System.out.println("Size : " + playerList.size());
 			}
 			} catch (NumberFormatException | IOException e) {
 				// TODO Auto-generated catch block
