@@ -13,7 +13,8 @@ public class Player {
 		this.maze = maze;
 	}
 	
-	
+	public int getX(){return x;}
+	public int getY(){return y;}
 	public void moveLeft()
 	{
 		if(!maze.maze[x-1][y].isWall())
