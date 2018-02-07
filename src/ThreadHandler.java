@@ -80,13 +80,13 @@ public class ThreadHandler extends Thread {
 					
 					if (i == p.getX() && j == p.getY() && p.id == this.player.id && drawMaze)
 					{
-						string += "0";
+						string += "X";
 						drawMaze = false;
 						
 					}
 					if(i == p.getX() && j == p.getY() && p.getID() != this.player.id && drawMaze)
 					{
-						string+= "1";
+						string+= Integer.toString(p.id);
 						drawMaze = false;
 					}	
 					
