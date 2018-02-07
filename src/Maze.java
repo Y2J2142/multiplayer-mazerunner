@@ -25,6 +25,8 @@ public class Maze {
 		
 	}
 	
+	public int getR(){return R;}
+	public int getC(){return C;}
 	public void makePath(int r, int c)
 	{
 		if(!this.maze[r][c].isVisited())
