@@ -5,6 +5,8 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.List;
 
+import javax.lang.model.util.ElementScanner6;
+
 
 public class ThreadHandler extends Thread {
 	Socket client;
@@ -72,30 +74,25 @@ public class ThreadHandler extends Thread {
 		{
 			for (int j = 0; j < this.maze.getC(); j++) 
 			{
-				boolean playerDrawn = false;
+				boolean drawMaze = true;
 				for (Player p : playerList) 
 				{
-					if (i == player.getX() && j == player.getY() && !playerDrawn)
+					
+					if (i == p.getX() && j == p.getY() && p.id == this.player.id && drawMaze)
 					{
 						string += "0";
-						playerDrawn = true;
+						drawMaze = false;
+						
 					}
-					else if(i == p.getX() && j == p.getY() && !playerDrawn)
+					if(i == p.getX() && j == p.getY() && p.getID() != this.player.id && drawMaze)
 					{
-						if(p.getID() == this.id)
-						{
-							playerDrawn = true;
-							break;
-						} 
 						string+= "1";
-						playerDrawn = true;
-					}
-					else if(!playerDrawn)
-					{
-						string += this.maze.maze[i][j].toString();
-						playerDrawn = true;
-					}
+						drawMaze = false;
+					}	
+					
 				}
+				if(drawMaze)
+					string += this.maze.maze[i][j].toString();
 			}
 			string += '\n';
 		}
