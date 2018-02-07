@@ -25,7 +25,6 @@ public class Server {
 				Socket client = server.accept();
 				ThreadHandler handler = new ThreadHandler(client, id++, maze, playerList);
 				handler.start();
-				System.out.println("Size : " + playerList.size());
 			}
 			} catch (NumberFormatException | IOException e) {
 				// TODO Auto-generated catch block
