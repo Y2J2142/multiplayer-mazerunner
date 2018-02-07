@@ -3,17 +3,22 @@ import java.io.InputStreamReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.List;
 
 public class ThreadHandler extends Thread{
 Socket client;
 int id;
 Maze maze;
-
-ThreadHandler(Socket client, int id, Maze maze)
+Player player;
+List<Player> playerList;
+ThreadHandler(Socket client, int id, Maze maze, List<Player> playerList)
 {
 	this.client = client;
 	this.id = id;
 	this.maze = maze;
+	this.player = new Player(1, 1, id, maze);
+	this.playerList = playerList;
+	this.playerList.add(this.player);
 }
 
 public void run()
