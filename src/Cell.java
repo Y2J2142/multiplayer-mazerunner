@@ -2,6 +2,7 @@
 public class Cell {
 	boolean wall;
 	boolean visited;
+	boolean exit;
 	int r;
 	int c;
 	
@@ -9,6 +10,7 @@ public class Cell {
 	{
 		wall = false;
 		visited = false;
+		exit = false;
 		this.r = r;
 		this.c = c;
 	}
@@ -17,7 +19,14 @@ public class Cell {
 	{
 		return this.wall;
 	}
-	
+	public boolean isExit()
+	{
+		return this.exit;
+	} 
+	public void setExit(boolean exit)
+	{
+		this.exit = exit;
+	}
 	public void setWall(boolean wall)
 	{
 		this.wall = wall;
@@ -53,7 +62,9 @@ public class Cell {
 	public String toString()
 	{
 		String string = new String();
-		if(this.isWall())
+		if(this.isExit())
+			string += "@";
+		else if(this.isWall())
 			string += "#";
 		else
 			string += " ";
