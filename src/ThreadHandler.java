@@ -30,28 +30,24 @@ public class ThreadHandler extends Thread {
 			PrintWriter writer = new PrintWriter(client.getOutputStream(), true);
 			BufferedReader reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
 			String fromClient = new String();
-			writer.println(maze.toString());
+			sendMaze(writer);
 			while (true) {
 
 				fromClient = reader.readLine().trim();
 
 				if (fromClient.equals("l")) {
-					writer.print("\033[H\033[2J");
 					player.moveLeft();
 					sendMaze(writer);
 				}
 				if (fromClient.equals("r")) {
-					writer.print("\033[H\033[2J");
 					player.moveRight();
 					sendMaze(writer);
 				}
 				if (fromClient.equals("u")) {
-					writer.print("\033[H\033[2J");
 					player.moveUp();
 					sendMaze(writer);
 				}
 				if (fromClient.equals("d")) {
-					writer.print("\033[H\033[2J");
 					player.moveDown();
 					sendMaze(writer);
 				}
@@ -86,7 +82,7 @@ public class ThreadHandler extends Thread {
 					}
 					if(i == p.getX() && j == p.getY() && p.getID() != this.player.id && drawMaze)
 					{
-						string+= Integer.toString(p.id);
+						string+= "0";
 						drawMaze = false;
 					}	
 					
