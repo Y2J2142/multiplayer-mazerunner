@@ -89,10 +89,14 @@ public class FxClient extends Application {
                 fromServer = in.readLine();
                 if(fromServer.equals("end"))
                 {
-                    socket.close();
+                    
+                    
                     canvas.setOnKeyPressed(null);
                     gc.clearRect(0,0,canvas.getHeight(),canvas.getWidth());
-                    gc.fillText("You placed : " + "nth", canvas.getHeight()/2, canvas.getWidth()/2);
+                    String position = new String();
+                    position = in.readLine();
+                    gc.fillText("You placed : " + position, canvas.getHeight()/2, canvas.getWidth()/2);
+                    socket.close();
                     return;
                 }
                 for (int j = 0; j < fromServer.length(); j++) {

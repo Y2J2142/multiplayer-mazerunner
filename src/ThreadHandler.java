@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.lang.model.util.ElementScanner6;
 
@@ -14,15 +15,15 @@ public class ThreadHandler extends Thread {
 	Maze maze;
 	Player player;
 	List<Player> playerList;
-
-	ThreadHandler(Socket client, int id, Maze maze, List<Player> playerList) {
+	AtomicInteger position;
+	ThreadHandler(Socket client, int id, Maze maze, List<Player> playerList, AtomicInteger position) {
 		this.client = client;
 		this.id = id;
 		this.maze = maze;
 		this.player = new Player(1, 1, id, maze);
 		playerList.add(this.player);
 		this.playerList = playerList;
-		
+		this.position = position;
 	}
 
 	public void run() {
@@ -40,6 +41,7 @@ public class ThreadHandler extends Thread {
 					if(player.moveLeft())
 					{
 						writer.println("end");
+						writer.println(Integer.toString(position.incrementAndGet()));
 						play = false;
 						
 					}
@@ -49,6 +51,7 @@ public class ThreadHandler extends Thread {
 					if(player.moveRight())
 					{
 						writer.println("end");
+						writer.println(Integer.toString(position.incrementAndGet()));
 						play = false;
 						
 					}
@@ -58,6 +61,7 @@ public class ThreadHandler extends Thread {
 					if(player.moveUp())
 					{
 						writer.println("end");
+						writer.println(Integer.toString(position.incrementAndGet()));
 						play = false;
 					} 
 					else sendMaze(writer);
@@ -66,6 +70,7 @@ public class ThreadHandler extends Thread {
 					if(player.moveDown())
 					{
 						writer.println("end");
+						writer.println(Integer.toString(position.incrementAndGet()));
 						play = false;
 					}
 					else sendMaze(writer);
@@ -83,7 +88,7 @@ public class ThreadHandler extends Thread {
 
 	}
 
-	void sendMaze(PrintWriter writer) {
+	void sendMaze(PrintWriter writer) {	
 		writer.println(this.playerMaze());
 	}
 
