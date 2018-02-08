@@ -14,6 +14,7 @@ public class Server {
 	public static void main(String[] args)
 	{
 		maze.makePath(1,1);
+		maze.makeExits(5);
 		playerList = Collections.synchronizedList(new ArrayList<>());	
 			int id = 0;
 			ServerSocket server;
