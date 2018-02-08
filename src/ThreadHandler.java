@@ -31,31 +31,54 @@ public class ThreadHandler extends Thread {
 			BufferedReader reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
 			String fromClient = new String();
 			sendMaze(writer);
-			while (true) {
+			boolean play = true;
+			while (play) {
 
 				fromClient = reader.readLine().trim();
 
 				if (fromClient.equals("l")) {
-					player.moveLeft();
-					sendMaze(writer);
+					if(player.moveLeft())
+					{
+						writer.println("end");
+						play = false;
+						
+					}
+					else sendMaze(writer);
 				}
 				if (fromClient.equals("r")) {
-					player.moveRight();
-					sendMaze(writer);
+					if(player.moveRight())
+					{
+						writer.println("end");
+						play = false;
+						
+					}
+					else sendMaze(writer);
 				}
 				if (fromClient.equals("u")) {
-					player.moveUp();
-					sendMaze(writer);
+					if(player.moveUp())
+					{
+						writer.println("end");
+						play = false;
+					} 
+					else sendMaze(writer);
 				}
 				if (fromClient.equals("d")) {
-					player.moveDown();
-					sendMaze(writer);
+					if(player.moveDown())
+					{
+						writer.println("end");
+						play = false;
+					}
+					else sendMaze(writer);
 				}
 
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+		finally{
+			try { client.close();}
+			catch(Exception e) {e.printStackTrace();}
 		}
 
 	}
