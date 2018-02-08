@@ -1,16 +1,19 @@
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Collections;
-
+import java.util.Random;
 public class Maze {
 	
 	int R;
 	int C;
 	Cell[][] maze;
+	List<Cell> exits;
 	
 	Maze(int r, int c)
 	{
 		R = r;
 		C = c;
+		exits = new ArrayList<>();
 		maze = new Cell[R][C];
 		for(int i = 0; i < R; i++)
 			for(int j = 0; j < C; j++)
@@ -81,7 +84,19 @@ public class Maze {
 		}
 	}
 	
-	
+	public void makeExits(int numberOfExits)
+	{
+		Random rng = new Random();
+
+		for(int i = 0; i <= numberOfExits; i++)
+		{
+			int row = rng.nextInt(this.R);
+			int col = rng.nextInt(this.C);
+			this.maze[row][col].setExit(true);
+			this.maze[row][col].setWall(false);
+			exits.add(this.maze[row][col]);
+		}
+	}
 	public String toString()
 	{
 		String string = new String();
