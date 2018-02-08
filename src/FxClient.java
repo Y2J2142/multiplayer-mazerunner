@@ -100,17 +100,16 @@ public class FxClient extends Application {
                     return;
                 }
                 for (int j = 0; j < fromServer.length(); j++) {
-                    if (fromServer.charAt(j) == 'X') {
-                        gc.setFill(Color.RED);
+                    if (fromServer.charAt(j) == '0') {
+                        gc.setFill(Color.BLUE);
                         gc.fillRect(j * 20, i * 20, 20, 20);
                     } else if (fromServer.charAt(j) == '#') {
                         gc.setFill(Color.BLACK);
                         gc.fillRect(j * 20, i * 20, 20, 20);
-                    } else if (fromServer.charAt(j) == '0') {
-                        gc.setFill(Color.BLUE);
+                    } else if (fromServer.charAt(j) == 'X') {
+                        gc.setFill(Color.RED);
                         gc.fillRect(j * 20, i * 20, 20, 20);
-                    }
-                    else if(fromServer.charAt(j) == '@'){
+                    } else if(fromServer.charAt(j) == '@'){
                         gc.setFill(Color.GOLD);
                         gc.fillRect(j * 20, i * 20, 20, 20);
 

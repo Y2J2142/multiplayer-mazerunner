@@ -99,23 +99,26 @@ public class ThreadHandler extends Thread {
 			for (int j = 0; j < this.maze.getC(); j++) 
 			{
 				boolean drawMaze = true;
+				char tempPlayer = 'e';
 				for (Player p : playerList) 
 				{
-					
-					if (i == p.getX() && j == p.getY() && p.id == this.player.id && drawMaze)
+					if(i == p.getX() && j == p.getY() && p.getID() != this.player.id)
 					{
-						string += "X";
-						drawMaze = false;
-						
-					}
-					if(i == p.getX() && j == p.getY() && p.getID() != this.player.id && drawMaze)
-					{
-						string+= "0";
+						tempPlayer = '0';
 						drawMaze = false;
 					}	
+					if (i == p.getX() && j == p.getY() && p.id == this.player.id)
+					{
+						tempPlayer = 'X';
+						drawMaze = false;
+						break;
+						
+					}
 					
 				}
-				if(drawMaze)
+				if(!drawMaze && tempPlayer != 'e')
+					string += tempPlayer;
+				else if(drawMaze)
 					string += this.maze.maze[i][j].toString();
 			}
 			string += '\n';
