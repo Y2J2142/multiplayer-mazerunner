@@ -40,7 +40,7 @@ public class FxClient extends Application {
             canvas = new Canvas(1000, 1000);
             canvas.setFocusTraversable(true);
             out.println("l");
-            readMaze(41, in, canvas);
+            readMaze(41, in, canvas, socket);
             stack.getChildren().add(canvas);
 
             Scene scene = new Scene(stack, 1000, 1000);
@@ -52,16 +52,16 @@ public class FxClient extends Application {
                     KeyCode keyCode = event.getCode();
                     if (keyCode.equals(KeyCode.DOWN)) {
                         out.println("d");
-                        readMaze(41, in, canvas);
+                        readMaze(41, in, canvas, socket);
                     } else if (keyCode.equals(KeyCode.UP)) {
                         out.println("u");
-                        readMaze(41, in, canvas);
+                        readMaze(41, in, canvas, socket);
                     } else if (keyCode.equals(KeyCode.LEFT)) {
                         out.println("l");
-                        readMaze(41, in, canvas);
+                        readMaze(41, in, canvas, socket);
                     } else if (keyCode.equals(KeyCode.RIGHT)) {
                         out.println("r");
-                        readMaze(41, in, canvas);
+                        readMaze(41, in, canvas, socket);
                     }
                 }
 
@@ -69,7 +69,8 @@ public class FxClient extends Application {
             stack.getChildren().add(text);
             primaryStage.setScene(scene);
             primaryStage.show();
-
+            
+            String fromServer = new String();
             for (int i = 0; i <= 41; i++) {
                 fromServer = in.readLine(); 
             }
@@ -79,13 +80,21 @@ public class FxClient extends Application {
         }
     }
 
-    void readMaze(int size, BufferedReader in, Canvas canvas) {
+    void readMaze(int size, BufferedReader in, Canvas canvas, Socket socket) {
         for (int i = 0; i <= size; i++) {
             GraphicsContext gc = canvas.getGraphicsContext2D();
             try 
             {
                 String fromServer = new String();
                 fromServer = in.readLine();
+                if(fromServer.equals("end"))
+                {
+                    socket.close();
+                    canvas.setOnKeyPressed(null);
+                    gc.clearRect(0,0,canvas.getHeight(),canvas.getWidth());
+                    gc.fillText("You placed : " + "nth", canvas.getHeight()/2, canvas.getWidth()/2);
+                    return;
+                }
                 for (int j = 0; j < fromServer.length(); j++) {
                     if (fromServer.charAt(j) == 'X') {
                         gc.setFill(Color.RED);
