@@ -41,6 +41,9 @@ public class FxClient extends Application {
             canvas.setFocusTraversable(true);
             out.println("l");
             readMaze(41, in, canvas, socket);
+            String wait =  new String();
+            System.out.println("Waiting for server to start");
+            while(!(wait = in.readLine()).equals("start"));
             stack.getChildren().add(canvas);
 
             Scene scene = new Scene(stack, 1000, 1000);

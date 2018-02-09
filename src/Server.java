@@ -7,29 +7,32 @@ import java.util.List;
 import java.util.Vector;
 import java.util.Collections;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.Timer;
 import java.util.TimerTask;
+
 public class Server {
 	
 	static Maze maze = new Maze(41,41);
 	static List<Player> playerList;
 	static AtomicInteger position = new AtomicInteger();
-	static boolean play = false;
+	static AtomicBoolean wait = new AtomicBoolean();
 	public static void main(String[] args)
 	{
 		position.set(0);
 		maze.makePath(1,1);
 		maze.makeExits(5);
+		wait.set(true);
 		Timer timer = new Timer();
 		TimerTask startGame = new TimerTask(){
 		
 			@Override
 			public void run() {
 				System.out.println("Setting play to true");
-				play = true;
+				wait.set(false);
 			}
 		};
-		timer.schedule(startGame,10000);
+		timer.schedule(startGame,20000);
 		playerList = Collections.synchronizedList(new ArrayList<>());	
 			int id = 0;
 			ServerSocket server;
@@ -39,7 +42,7 @@ public class Server {
 			while(true)
 			{
 				Socket client = server.accept();
-				ThreadHandler handler = new ThreadHandler(client, id++, maze, playerList, position);
+				ThreadHandler handler = new ThreadHandler(client, id++, maze, playerList, position, wait);
 				handler.start();
 			}
 			} catch (NumberFormatException | IOException e) {

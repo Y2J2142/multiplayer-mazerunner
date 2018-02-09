@@ -5,8 +5,7 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
-
-import javax.lang.model.util.ElementScanner6;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 
 public class ThreadHandler extends Thread {
@@ -16,7 +15,9 @@ public class ThreadHandler extends Thread {
 	Player player;
 	List<Player> playerList;
 	AtomicInteger position;
-	ThreadHandler(Socket client, int id, Maze maze, List<Player> playerList, AtomicInteger position) {
+	AtomicBoolean wait;
+
+	ThreadHandler(Socket client, int id, Maze maze, List<Player> playerList, AtomicInteger position, AtomicBoolean wait) {
 		this.client = client;
 		this.id = id;
 		this.maze = maze;
@@ -24,6 +25,7 @@ public class ThreadHandler extends Thread {
 		playerList.add(this.player);
 		this.playerList = playerList;
 		this.position = position;
+		this.wait = wait;
 	}
 
 	public void run() {
@@ -33,8 +35,13 @@ public class ThreadHandler extends Thread {
 			String fromClient = new String();
 			sendMaze(writer);
 			boolean play = true;
+			while(wait.get())
+				{
+					writer.println(Boolean.toString(wait.get()));
+				}
+			writer.println("start");
 			while (play) {
-
+				
 				fromClient = reader.readLine().trim();
 
 				if (fromClient.equals("l")) {
