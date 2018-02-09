@@ -40,12 +40,20 @@ public class Server {
 			public void run() {
 				if(maze.getExitSize()>0)
 					maze.removeExit();
+				else
+				{
+					maze.makePath(1,1);
+					maze.makeExits(5);
+					wait.set(true);
+					position.set(0);
+					playerList.clear();
+				}
 				
 			}
 		};
 		
-		timer.schedule(startGame, 20000);
-		timer.schedule(removeExit, 40000, 10000);
+		timer.schedule(startGame, 20000, 60000);
+		timer.schedule(removeExit, 10000, 10000);
 		playerList = Collections.synchronizedList(new ArrayList<>());	
 			int id = 0;
 			ServerSocket server;
