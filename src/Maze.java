@@ -27,7 +27,7 @@ public class Maze {
 
 		
 	}
-	
+	public int getExitSize(){return this.exits.size();}
 	public int getR(){return R;}
 	public int getC(){return C;}
 	public void makePath(int r, int c)
