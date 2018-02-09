@@ -57,12 +57,14 @@ public class Server {
 				Socket client = server.accept();
 				ThreadHandler handler = new ThreadHandler(client, id++, maze, playerList, position, wait);
 				handler.start();
+				System.out.println("Client accepted, ID : " + id);
+				
 			}
+			
 			} catch (NumberFormatException | IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		
 	}
 
 }
