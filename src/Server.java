@@ -19,10 +19,12 @@ public class Server {
 	static AtomicBoolean wait = new AtomicBoolean();
 	public static void main(String[] args)
 	{
+
 		position.set(0);
 		maze.makePath(1,1);
 		maze.makeExits(5);
 		wait.set(true);
+		
 		Timer timer = new Timer();
 		TimerTask startGame = new TimerTask(){
 		
@@ -32,7 +34,18 @@ public class Server {
 				wait.set(false);
 			}
 		};
-		timer.schedule(startGame,20000);
+		TimerTask removeExit = new TimerTask(){
+		
+			@Override
+			public void run() {
+				if(maze.getExitSize()>0)
+					maze.removeExit();
+				
+			}
+		};
+		
+		timer.schedule(startGame, 20000);
+		timer.schedule(removeExit, 40000, 10000);
 		playerList = Collections.synchronizedList(new ArrayList<>());	
 			int id = 0;
 			ServerSocket server;
