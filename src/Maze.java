@@ -88,10 +88,10 @@ public class Maze {
 	{
 		Random rng = new Random();
 
-		for(int i = 0; i <= numberOfExits; i++)
+		for(int i = 0; i < numberOfExits; i++)
 		{
-			int row = rng.nextInt(this.R);
-			int col = rng.nextInt(this.C);
+			int row = rng.nextInt(this.R-2)+1;
+			int col = rng.nextInt(this.C-2)+1;
 			this.maze[row][col].setExit(true);
 			this.maze[row][col].setWall(false);
 			exits.add(this.maze[row][col]);
