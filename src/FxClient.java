@@ -110,7 +110,7 @@ public class FxClient extends Application {
                         gc.setFill(Color.RED);
                         gc.fillRect(j * 20, i * 20, 20, 20);
                     } else if(fromServer.charAt(j) == '@'){
-                        gc.setFill(Color.GOLD);
+                        gc.setFill(Color.GOLDENROD);
                         gc.fillRect(j * 20, i * 20, 20, 20);
 
                     } else {
