@@ -39,7 +39,10 @@ public class Server {
 			@Override
 			public void run() {
 				if(maze.getExitSize()>0)
+				{
 					maze.removeExit();
+					System.out.println("Exit removed");
+				}
 				else
 				{
 					System.out.println("Server reset");
