@@ -42,6 +42,7 @@ public class Server {
 					maze.removeExit();
 				else
 				{
+					System.out.println("Server reset");
 					maze.makePath(1,1);
 					maze.makeExits(5);
 					wait.set(true);
