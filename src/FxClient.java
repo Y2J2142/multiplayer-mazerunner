@@ -73,10 +73,7 @@ public class FxClient extends Application {
             primaryStage.setScene(scene);
             primaryStage.show();
             
-            String fromServer = new String();
-            for (int i = 0; i <= 41; i++) {
-                fromServer = in.readLine(); 
-            }
+            readMaze(41, in, canvas, socket);
 
         } catch (IOException e) {
             e.printStackTrace();
