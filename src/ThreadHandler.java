@@ -45,7 +45,7 @@ public class ThreadHandler extends Thread {
 				fromClient = reader.readLine().trim();
 
 				if (fromClient.equals("l")) {
-					if(player.moveLeft())
+					if(player.moveLeft() || maze.getExitSize() == 0)
 					{
 						writer.println("end");
 						writer.println(Integer.toString(position.incrementAndGet()));
@@ -55,7 +55,7 @@ public class ThreadHandler extends Thread {
 					else sendMaze(writer);
 				}
 				if (fromClient.equals("r")) {
-					if(player.moveRight())
+					if(player.moveRight() || maze.getExitSize() == 0)
 					{
 						writer.println("end");
 						writer.println(Integer.toString(position.incrementAndGet()));
@@ -65,7 +65,7 @@ public class ThreadHandler extends Thread {
 					else sendMaze(writer);
 				}
 				if (fromClient.equals("u")) {
-					if(player.moveUp())
+					if(player.moveUp() || maze.getExitSize() == 0)
 					{
 						writer.println("end");
 						writer.println(Integer.toString(position.incrementAndGet()));
@@ -74,7 +74,7 @@ public class ThreadHandler extends Thread {
 					else sendMaze(writer);
 				}
 				if (fromClient.equals("d")) {
-					if(player.moveDown())
+					if(player.moveDown() || maze.getExitSize() == 0)
 					{
 						writer.println("end");
 						writer.println(Integer.toString(position.incrementAndGet()));
