@@ -97,6 +97,15 @@ public class Maze {
 			exits.add(this.maze[row][col]);
 		}
 	}
+
+	public void removeExit()
+	{
+		Random rng = new Random();
+		int index = rng.nextInt(exits.size());
+		exits.get(index).setExit(false);
+		exits.get(index).setWall(false);
+		exits.remove(index);
+	}
 	public String toString()
 	{
 		String string = new String();
