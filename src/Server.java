@@ -13,16 +13,18 @@ import java.util.TimerTask;
 
 public class Server {
 	
-	static Maze maze = new Maze(41,41);
+	static Config config = new Config("config.xml");
+	static Maze maze = new Maze(config.getRows(),config.getCols());
 	static List<Player> playerList;
 	static AtomicInteger position = new AtomicInteger();
 	static AtomicBoolean wait = new AtomicBoolean();
+	static int delay = config.getDelay();
 	public static void main(String[] args)
 	{
 
 		position.set(0);
 		maze.makePath(1,1);
-		maze.makeExits(5);
+		maze.makeExits(config.getNumberOfExits());
 		wait.set(true);
 		
 		Timer timer = new Timer();
@@ -47,7 +49,7 @@ public class Server {
 				{
 					System.out.println("Server reset");
 					maze.makePath(1,1);
-					maze.makeExits(5);
+					maze.makeExits(config.getNumberOfExits());
 					wait.set(true);
 					position.set(0);
 					playerList.clear();
@@ -56,13 +58,13 @@ public class Server {
 			}
 		};
 		
-		timer.schedule(startGame,	 20000, 120000);
-		timer.schedule(removeExit,	 20000, 20000);
+		timer.schedule(startGame,	 delay, (config.getNumberOfExits()+1) * delay);
+		timer.schedule(removeExit,	 delay, delay);
 		playerList = Collections.synchronizedList(new ArrayList<>());	
 			int id = 0;
 			ServerSocket server;
 			try {
-				server = new ServerSocket(Integer.parseInt(args[0]));
+				server = new ServerSocket(config.getPort());
 			
 			while(true)
 			{
