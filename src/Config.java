@@ -16,6 +16,8 @@ public class Config
     int rows;
     int cols;
     int blockSize;
+    int numberOfExits;
+    int delay;
 
     Config(String configFile)
     {
@@ -39,8 +41,10 @@ public class Config
                 try{
                     this.port = Integer.parseInt(element.getElementsByTagName("port").item(0).getTextContent());
                     this.rows = Integer.parseInt(element.getElementsByTagName("rows").item(0).getTextContent());
-                    this.cols = Integer.parseInt(element.getElementsByTagName("rows").item(0).getTextContent());
+                    this.cols = Integer.parseInt(element.getElementsByTagName("cols").item(0).getTextContent());
                     this.blockSize = Integer.parseInt(element.getElementsByTagName("blocksize").item(0).getTextContent());
+                    this.numberOfExits = Integer.parseInt(element.getElementsByTagName("numberofexits").item(0).getTextContent());
+                    this.delay = Integer.parseInt(element.getElementsByTagName("delay").item(0).getTextContent());
                 
                 
                 }catch(NumberFormatException e){e.printStackTrace();}
@@ -51,7 +55,14 @@ public class Config
             e.printStackTrace();
         }
     }
-
+    public int getDelay()
+    {
+        return this.delay;
+    }
+    public int getNumberOfExits()
+    {
+        return this.numberOfExits;
+    }
     public String getIP()
     {
         return this.ip;
