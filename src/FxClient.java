@@ -40,7 +40,7 @@ public class FxClient extends Application {
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             out = new PrintWriter(socket.getOutputStream(), true);
             StackPane stack = new StackPane();
-            canvas = new Canvas(1000,1000);
+            canvas = new Canvas(cols*size,rows*size);
             canvas.setFocusTraversable(true);
             out.println("l");
             readMaze(rows, size, in, canvas, socket);
@@ -49,7 +49,7 @@ public class FxClient extends Application {
             while(!(wait = in.readLine()).equals("start"));
             stack.getChildren().add(canvas);
 
-            Scene scene = new Scene(stack,1000,1000);
+            Scene scene = new Scene(stack,cols*size,rows*size);
             canvas.setOnKeyPressed(new EventHandler<KeyEvent>() {
 
                 @Override
