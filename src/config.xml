@@ -2,7 +2,9 @@
 <config>
   <ip>127.0.0.1</ip>
   <port>5566</port>
-  <rows>41</rows>
-  <cols>41</cols>
-  <blocksize>30</blocksize>
+  <rows>31</rows>
+  <cols>31</cols>
+  <blocksize>20</blocksize>
+  <numberofexits>5</numberofexits>
+  <delay>2000</delay>
 </config>
