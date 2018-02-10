@@ -56,8 +56,8 @@ public class Server {
 			}
 		};
 		
-		timer.schedule(startGame,	 20000, 61000);
-		timer.schedule(removeExit,	 30000, 10000);
+		timer.schedule(startGame,	 20000, 120000);
+		timer.schedule(removeExit,	 20000, 20000);
 		playerList = Collections.synchronizedList(new ArrayList<>());	
 			int id = 0;
 			ServerSocket server;
