@@ -52,7 +52,7 @@ public class Config
         }
     }
 
-    public String geIP()
+    public String getIP()
     {
         return this.ip;
     }
