@@ -32,21 +32,24 @@ public class FxClient extends Application {
     public void start(Stage primaryStage) {
 
         try {
-
-            Socket socket = new Socket(InetAddress.getLocalHost(), 5566);
+            Config config = new Config("config.xml");
+            int size = config.getBlockSize();
+            int rows = config.getRows();
+            int cols = config.getCols();
+            Socket socket = new Socket(config.getIP(), config.getPort());
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             out = new PrintWriter(socket.getOutputStream(), true);
             StackPane stack = new StackPane();
-            canvas = new Canvas(1000, 1000);
+            canvas = new Canvas(1000,1000);
             canvas.setFocusTraversable(true);
             out.println("l");
-            readMaze(41, in, canvas, socket);
+            readMaze(rows, size, in, canvas, socket);
             String wait =  new String();
             System.out.println("Waiting for server to start");
             while(!(wait = in.readLine()).equals("start"));
             stack.getChildren().add(canvas);
 
-            Scene scene = new Scene(stack, 1000, 1000);
+            Scene scene = new Scene(stack,1000,1000);
             canvas.setOnKeyPressed(new EventHandler<KeyEvent>() {
 
                 @Override
@@ -55,16 +58,16 @@ public class FxClient extends Application {
                     KeyCode keyCode = event.getCode();
                     if (keyCode.equals(KeyCode.DOWN)) {
                         out.println("d");
-                        readMaze(41, in, canvas, socket);
+                        readMaze(rows, size, in, canvas, socket);
                     } else if (keyCode.equals(KeyCode.UP)) {
                         out.println("u");
-                        readMaze(41, in, canvas, socket);
+                        readMaze(rows, size, in, canvas, socket);
                     } else if (keyCode.equals(KeyCode.LEFT)) {
                         out.println("l");
-                        readMaze(41, in, canvas, socket);
+                        readMaze(rows, size, in, canvas, socket);
                     } else if (keyCode.equals(KeyCode.RIGHT)) {
                         out.println("r");
-                        readMaze(41, in, canvas, socket);
+                        readMaze(rows, size, in, canvas, socket);
                     }
                 }
 
@@ -73,15 +76,15 @@ public class FxClient extends Application {
             primaryStage.setScene(scene);
             primaryStage.show();
             
-            readMaze(41, in, canvas, socket);
+            readMaze(rows, size,  in, canvas, socket);
 
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    void readMaze(int size, BufferedReader in, Canvas canvas, Socket socket) {
-        for (int i = 0; i <= size; i++) {
+    void readMaze(int rows,int size, BufferedReader in, Canvas canvas, Socket socket) {
+        for (int i = 0; i <= rows; i++) {
             GraphicsContext gc = canvas.getGraphicsContext2D();
             try 
             {
@@ -102,20 +105,20 @@ public class FxClient extends Application {
                 for (int j = 0; j < fromServer.length(); j++) {
                     if (fromServer.charAt(j) == '0') {
                         gc.setFill(Color.BLUE);
-                        gc.fillRect(j * 20, i * 20, 20, 20);
+                        gc.fillRect(j * size, i * size, size, size);
                     } else if (fromServer.charAt(j) == '#') {
                         gc.setFill(Color.BLACK);
-                        gc.fillRect(j * 20, i * 20, 20, 20);
+                        gc.fillRect(j * size, i * size, size, size);
                     } else if (fromServer.charAt(j) == 'X') {
                         gc.setFill(Color.RED);
-                        gc.fillRect(j * 20, i * 20, 20, 20);
+                        gc.fillRect(j * size, i * size, size, size);
                     } else if(fromServer.charAt(j) == '@'){
                         gc.setFill(Color.GOLDENROD);
-                        gc.fillRect(j * 20, i * 20, 20, 20);
+                        gc.fillRect(j * size, i * size, size, size);
 
                     } else {
                         gc.setFill(Color.WHITE);
-                        gc.fillRect(j * 20, i * 20, 20, 20);
+                        gc.fillRect(j * size, i * size, size, size);
                     }
 
                 }
