@@ -48,6 +48,7 @@ public class Server {
 				else
 				{
 					System.out.println("Server reset");
+					maze = new Maze(config.getRows(),config.getCols());
 					maze.makePath(1,1);
 					maze.makeExits(config.getNumberOfExits());
 					wait.set(true);
