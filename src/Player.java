@@ -4,6 +4,7 @@ public class Player {
 	int y;
 	int id;
 	Maze maze;
+	String name;
 	
 	Player(int x, int y, int id, Maze maze)
 	{
@@ -11,8 +12,13 @@ public class Player {
 		this.x = y;
 		this.id = id;
 		this.maze = maze;
+		this.name = new String();
 	}
-	
+	public void setName(String name)
+	{
+		this.name = name;
+	}
+	public String getName(){return name;}
 	public int getX(){return x;}
 	public int getY(){return y;}
 	public int getID(){return id;}
