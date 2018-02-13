@@ -18,11 +18,13 @@ public class Server {
 	static List<Player> playerList;
 	static AtomicInteger position = new AtomicInteger();
 	static AtomicBoolean wait = new AtomicBoolean();
+	static AtomicInteger points = new AtomicInteger();
 	static int delay = config.getDelay();
 	public static void main(String[] args)
 	{
 
 		position.set(0);
+		points.set(config.getNumberOfExits());
 		maze.makePath(1,1);
 		maze.makeExits(config.getNumberOfExits());
 		wait.set(true);
@@ -44,6 +46,7 @@ public class Server {
 				{
 					maze.removeExit();
 					System.out.println("Exit removed");
+					points.decrementAndGet();
 					if(maze.getExitSize() == 0)
 					{
 						System.out.println("Server reset");
@@ -70,7 +73,7 @@ public class Server {
 			while(true)
 			{
 				Socket client = server.accept();
-				ThreadHandler handler = new ThreadHandler(client, id++, maze, playerList, position, wait);
+				ThreadHandler handler = new ThreadHandler(client, id++, maze, playerList, position, wait, points);
 				handler.start();
 				System.out.println("Client accepted, ID : " + id);
 				
