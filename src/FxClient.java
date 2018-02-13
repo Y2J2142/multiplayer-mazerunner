@@ -4,7 +4,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.Socket;
-
+import javafx.application.Platform;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -17,13 +17,15 @@ import javafx.stage.Stage;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.paint.Color;
 import javafx.scene.canvas.GraphicsContext;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class FxClient extends Application {
 
     PrintWriter out;
     Text text = new Text();
     Canvas canvas;
-
+    Timer timer = new Timer();
     public static void main(String[] args) {
         launch(args);
     }
@@ -31,6 +33,17 @@ public class FxClient extends Application {
     @Override
     public void start(Stage primaryStage) {
 
+        TimerTask move = new TimerTask(){
+        
+            @Override
+            public void run() {
+                
+                Platform.runLater(() -> canvas.fireEvent(new KeyEvent(KeyEvent.KEY_PRESSED,  
+                KeyCode.SPACE.toString(), KeyCode.SPACE.toString(),  
+                KeyCode.SPACE, false, false, false, false)) );
+                    }
+        };
+        timer.schedule(move, 1000, 100);
         try {
             Config config = new Config("config.xml");
             int size = config.getBlockSize();
