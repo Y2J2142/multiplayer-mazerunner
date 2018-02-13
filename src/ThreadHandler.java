@@ -82,6 +82,15 @@ public class ThreadHandler extends Thread {
 					}
 					else sendMaze(writer);
 				}
+				if (fromClient.equals("blank")) {
+					if(maze.getExitSize() == 0)
+					{
+						writer.println("end");
+						writer.println(Integer.toString(position.incrementAndGet()));
+						play = false;
+					}
+					else sendMaze(writer);
+				}
 
 			}
 		} catch (IOException e) {

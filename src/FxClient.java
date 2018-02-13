@@ -69,6 +69,10 @@ public class FxClient extends Application {
                         out.println("r");
                         readMaze(rows, size, in, canvas, socket);
                     }
+                    else if (keyCode.equals(KeyCode.SPACE)) {
+                        out.println("blank");
+                        readMaze(rows, size, in, canvas, socket);
+                    }
                 }
 
             });
