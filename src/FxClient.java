@@ -43,7 +43,7 @@ public class FxClient extends Application {
                 KeyCode.SPACE, false, false, false, false)) );
                     }
         };
-        timer.schedule(move, 1000, 100);
+        timer.schedule(move, 100, 100);
         try {
             Config config = new Config("config.xml");
             int size = config.getBlockSize();
@@ -55,8 +55,6 @@ public class FxClient extends Application {
             StackPane stack = new StackPane();
             canvas = new Canvas(cols*size,rows*size);
             canvas.setFocusTraversable(true);
-            out.println("l");
-            readMaze(rows, size, in, canvas, socket);
             String wait =  new String();
             System.out.println("Waiting for server to start");
             while(!(wait = in.readLine()).equals("start"));
@@ -92,8 +90,6 @@ public class FxClient extends Application {
             stack.getChildren().add(text);
             primaryStage.setScene(scene);
             primaryStage.show();
-            
-            readMaze(rows, size,  in, canvas, socket);
 
         } catch (IOException e) {
             e.printStackTrace();

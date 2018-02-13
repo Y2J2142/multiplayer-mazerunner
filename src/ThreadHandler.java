@@ -33,7 +33,6 @@ public class ThreadHandler extends Thread {
 			PrintWriter writer = new PrintWriter(client.getOutputStream(), true);
 			BufferedReader reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
 			String fromClient = new String();
-			sendMaze(writer);
 			boolean play = true;
 			while(wait.get())
 				{
