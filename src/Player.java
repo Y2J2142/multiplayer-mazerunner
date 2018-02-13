@@ -3,6 +3,7 @@ public class Player {
 	int x;
 	int y;
 	int id;
+	int score;
 	Maze maze;
 	String name;
 	
@@ -12,6 +13,7 @@ public class Player {
 		this.x = y;
 		this.id = id;
 		this.maze = maze;
+		this.score = 0;
 		this.name = new String();
 	}
 	public void setName(String name)
@@ -33,6 +35,11 @@ public class Player {
 
 	}
 	
+	public void increaseScore(int points)
+	{
+		this.score += points;
+	}
+	public int getScore(){return this.score;}
 	public boolean moveRight()
 	{
 		if(!maze.maze[x][y+1].isWall())
