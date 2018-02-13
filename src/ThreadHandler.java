@@ -34,6 +34,7 @@ public class ThreadHandler extends Thread {
 			BufferedReader reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
 			String fromClient = new String();
 			boolean play = true;
+			player.setName(reader.readLine());
 			while(wait.get())
 				{
 					writer.println(Boolean.toString(wait.get()));

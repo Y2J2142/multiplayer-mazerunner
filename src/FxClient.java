@@ -19,6 +19,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.canvas.GraphicsContext;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.Scanner;
 
 public class FxClient extends Application {
 
@@ -52,6 +53,8 @@ public class FxClient extends Application {
             Socket socket = new Socket(config.getIP(), config.getPort());
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             out = new PrintWriter(socket.getOutputStream(), true);
+            Scanner scn = new Scanner(System.in);
+            out.println(scn.nextLine());
             StackPane stack = new StackPane();
             canvas = new Canvas(cols*size,rows*size);
             canvas.setFocusTraversable(true);
