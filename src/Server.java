@@ -44,22 +44,22 @@ public class Server {
 				{
 					maze.removeExit();
 					System.out.println("Exit removed");
-				}
-				else
-				{
-					System.out.println("Server reset");
-					maze = new Maze(config.getRows(),config.getCols());
-					maze.makePath(1,1);
-					maze.makeExits(config.getNumberOfExits());
-					wait.set(true);
-					position.set(0);
-					playerList.clear();
+					if(maze.getExitSize() == 0)
+					{
+						System.out.println("Server reset");
+						maze = new Maze(config.getRows(),config.getCols());
+						maze.makePath(1,1);
+						maze.makeExits(config.getNumberOfExits());
+						wait.set(true);
+						position.set(0);
+						playerList.clear();
+					}
 				}
 				
 			}
 		};
 		
-		timer.schedule(startGame,	 delay, (config.getNumberOfExits()+1) * delay);
+		timer.schedule(startGame,	 delay, (config.getNumberOfExits()) * delay);
 		timer.schedule(removeExit,	 delay, delay);
 		playerList = Collections.synchronizedList(new ArrayList<>());	
 			int id = 0;
