@@ -74,23 +74,17 @@ public class FxClient extends Application {
                 public void handle(KeyEvent event) {
 
                     KeyCode keyCode = event.getCode();
-                    if (keyCode.equals(KeyCode.DOWN)) {
+                    if (keyCode.equals(KeyCode.DOWN)) 
                         out.println("d");
-                        readMaze(rows, size, in, canvas, socket);
-                    } else if (keyCode.equals(KeyCode.UP)) {
+                    else if (keyCode.equals(KeyCode.UP))
                         out.println("u");
-                        readMaze(rows, size, in, canvas, socket);
-                    } else if (keyCode.equals(KeyCode.LEFT)) {
+                    else if (keyCode.equals(KeyCode.LEFT))
                         out.println("l");
-                        readMaze(rows, size, in, canvas, socket);
-                    } else if (keyCode.equals(KeyCode.RIGHT)) {
+                    else if (keyCode.equals(KeyCode.RIGHT))
                         out.println("r");
-                        readMaze(rows, size, in, canvas, socket);
-                    }
-                    else if (keyCode.equals(KeyCode.SPACE)) {
+                    else if (keyCode.equals(KeyCode.SPACE)) 
                         out.println("blank");
-                        readMaze(rows, size, in, canvas, socket);
-                    }
+                    readMaze(rows, size, in, canvas, socket);
                 }
 
             });
@@ -103,8 +97,10 @@ public class FxClient extends Application {
         }
     }
 
-    void readMaze(int rows,int size, BufferedReader in, Canvas canvas, Socket socket) {
-        for (int i = 0; i <= rows; i++) {
+    void readMaze(int rows,int size, BufferedReader in, Canvas canvas, Socket socket) 
+    {
+        for (int i = 0; i <= rows; i++) 
+        {
             GraphicsContext gc = canvas.getGraphicsContext2D();
             try 
             {
@@ -115,29 +111,21 @@ public class FxClient extends Application {
                     readEndGame(in, canvas, socket);
                     return;
                 }
-                for (int j = 0; j < fromServer.length(); j++) {
-                    if (fromServer.charAt(j) == '0') {
+                for (int j = 0; j < fromServer.length(); j++) 
+                {
+                    if (fromServer.charAt(j) == '0') 
                         gc.setFill(Color.BLUE);
-                        gc.fillRect(j * size, i * size, size, size);
-                    } else if (fromServer.charAt(j) == '#') {
+                    else if (fromServer.charAt(j) == '#')
                         gc.setFill(Color.BLACK);
-                        gc.fillRect(j * size, i * size, size, size);
-                    } else if (fromServer.charAt(j) == 'X') {
+                    else if (fromServer.charAt(j) == 'X')
                         gc.setFill(Color.RED);
-                        gc.fillRect(j * size, i * size, size, size);
-                    } else if(fromServer.charAt(j) == '@'){
+                    else if(fromServer.charAt(j) == '@')
                         gc.setFill(Color.GOLDENROD);
-                        gc.fillRect(j * size, i * size, size, size);
-
-                    } else {
+                    else 
                         gc.setFill(Color.WHITE);
-                        gc.fillRect(j * size, i * size, size, size);
-                    }
-
+                    gc.fillRect(j * size, i * size, size, size);
                 }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            } catch (IOException e) {e.printStackTrace();}
         }
 
     }
