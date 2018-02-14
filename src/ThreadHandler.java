@@ -52,9 +52,9 @@ public class ThreadHandler extends Thread {
 			{
 				this.player = new Player(1, 1, id, this.maze);
 				this.player.setName(name);
+				playerList.add(this.player);
 			}
-			playerList.add(this.player);
-			player.setName(name);
+			
 			
 			
 			while(wait.get())
