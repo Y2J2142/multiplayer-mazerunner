@@ -16,16 +16,16 @@ public class ThreadHandler extends Thread {
 	List<Player> playerList;
 	AtomicInteger position;
 	AtomicBoolean wait;
+	AtomicInteger points;
 
-	ThreadHandler(Socket client, int id, Maze maze, List<Player> playerList, AtomicInteger position, AtomicBoolean wait) {
+	ThreadHandler(Socket client, int id, Maze maze, List<Player> playerList, AtomicInteger position, AtomicBoolean wait, AtomicInteger points) {
 		this.client = client;
 		this.id = id;
 		this.maze = maze;
-		this.player = new Player(1, 1, id, maze);
-		playerList.add(this.player);
 		this.playerList = playerList;
 		this.position = position;
 		this.wait = wait;
+		this.points = points;
 	}
 
 	public void run() {
