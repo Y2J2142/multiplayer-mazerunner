@@ -69,8 +69,7 @@ public class ThreadHandler extends Thread {
 				if (fromClient.equals("l")) {
 					if(player.moveLeft() || maze.getExitSize() == 0)
 					{
-						writer.println("end");
-						writer.println(Integer.toString(position.incrementAndGet()));
+						sendEndGame(writer, player, playerList);
 						play = false;
 						
 					}
@@ -79,8 +78,7 @@ public class ThreadHandler extends Thread {
 				if (fromClient.equals("r")) {
 					if(player.moveRight() || maze.getExitSize() == 0)
 					{
-						writer.println("end");
-						writer.println(Integer.toString(position.incrementAndGet()));
+						sendEndGame(writer, player, playerList);
 						play = false;
 						
 					}
@@ -89,8 +87,7 @@ public class ThreadHandler extends Thread {
 				if (fromClient.equals("u")) {
 					if(player.moveUp() || maze.getExitSize() == 0)
 					{
-						writer.println("end");
-						writer.println(Integer.toString(position.incrementAndGet()));
+						sendEndGame(writer, player, playerList);
 						play = false;
 					} 
 					else sendMaze(writer);
@@ -98,8 +95,7 @@ public class ThreadHandler extends Thread {
 				if (fromClient.equals("d")) {
 					if(player.moveDown() || maze.getExitSize() == 0)
 					{
-						writer.println("end");
-						writer.println(Integer.toString(position.incrementAndGet()));
+						sendEndGame(writer, player, playerList);
 						play = false;
 					}
 					else sendMaze(writer);
@@ -107,8 +103,7 @@ public class ThreadHandler extends Thread {
 				if (fromClient.equals("blank")) {
 					if(maze.getExitSize() == 0)
 					{
-						writer.println("end");
-						writer.println(Integer.toString(position.incrementAndGet()));
+						sendEndGame(writer, player, playerList);
 						play = false;
 					}
 					else sendMaze(writer);
@@ -163,6 +158,15 @@ public class ThreadHandler extends Thread {
 		}
 		return string;
 
+	}
+
+	void sendEndGame(PrintWriter writer,Player player, List<Player> playerList)
+	{
+		writer.println("end");
+		writer.println(playerList.size());
+		player.increaseScore(points.get());
+		for(Player p : playerList)
+			writer.println(p.getName() + p.getScore() + "points");
 	}
 
 }
