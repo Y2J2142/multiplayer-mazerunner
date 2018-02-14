@@ -12,6 +12,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.canvas.Canvas;
@@ -140,9 +141,10 @@ public class FxClient extends Application {
             String scoreBoard = new String();
             int playerListSize = Integer.parseInt(in.readLine());
             for(int i = 0; i < playerListSize; i++)
-                scoreBoard += in.readLine();
+                scoreBoard += in.readLine() +'\n';
             gc.clearRect(0,0,canvas.getHeight(),canvas.getWidth());
-            gc.fillText(scoreBoard, canvas.getHeight()/2, canvas.getWidth()/2);
+            gc.setFont(new Font(20));
+            gc.fillText(scoreBoard, 20, canvas.getWidth()/2);
         }catch(IOException e){e.printStackTrace();}
     }
 

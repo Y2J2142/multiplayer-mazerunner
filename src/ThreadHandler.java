@@ -166,7 +166,7 @@ public class ThreadHandler extends Thread {
 		writer.println(playerList.size());
 		player.increaseScore(points.get());
 		for(Player p : playerList)
-			writer.println(p.getName() + p.getScore() + "points");
+			writer.println(p.getName() + " : " + p.getScore() + " points");
 	}
 
 }
