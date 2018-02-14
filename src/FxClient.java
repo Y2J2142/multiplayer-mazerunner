@@ -156,6 +156,6 @@ public class FxClient extends Application {
             gc.clearRect(0,0,canvas.getHeight(),canvas.getWidth());
             gc.fillText(scoreBoard, canvas.getHeight()/2, canvas.getWidth()/2);
         }catch(IOException e){e.printStackTrace();}
-        }
+    }
 
 }
