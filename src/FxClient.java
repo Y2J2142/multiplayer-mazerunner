@@ -55,7 +55,7 @@ public class FxClient extends Application {
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             out = new PrintWriter(socket.getOutputStream(), true);
             
-            
+            System.out.print("Nickname : ");
             Scanner scn = new Scanner(System.in);
             out.println(scn.nextLine());
             
@@ -144,7 +144,7 @@ public class FxClient extends Application {
                 scoreBoard += in.readLine() +'\n';
             gc.clearRect(0,0,canvas.getHeight(),canvas.getWidth());
             gc.setFont(new Font(20));
-            gc.fillText(scoreBoard, 20, canvas.getWidth()/2);
+            gc.fillText(scoreBoard, canvas.getWidth()/3, canvas.getHeight()/4);
         }catch(IOException e){e.printStackTrace();}
     }
 
