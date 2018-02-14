@@ -145,4 +145,20 @@ public class FxClient extends Application {
 
     }
 
+
+    void readEndGame(BufferedReader in, Canvas canvas, Socket socket)
+    {
+        try{
+
+            canvas.setOnKeyPressed(null);
+            GraphicsContext gc = canvas.getGraphicsContext2D();
+            String scoreBoard = new String();
+            int playerListSize = Integer.parseInt(in.readLine());
+            for(int i = 0; i < playerListSize; i++)
+                scoreBoard += in.readLine();
+            gc.clearRect(0,0,canvas.getHeight(),canvas.getWidth());
+            gc.fillText(scoreBoard, canvas.getHeight()/2, canvas.getWidth()/2);
+        }catch(IOException e){e.printStackTrace();}
+        }
+
 }
