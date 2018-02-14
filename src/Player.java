@@ -40,6 +40,15 @@ public class Player {
 		this.score += points;
 	}
 	public int getScore(){return this.score;}
+	public void setMaze(Maze maze)
+	{
+		this.maze = maze;
+	}
+	public void setStart()
+	{
+		this.x = 1;
+		this.y = 1;
+	}
 	public boolean moveRight()
 	{
 		if(!maze.maze[x][y+1].isWall())
