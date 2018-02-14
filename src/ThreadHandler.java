@@ -34,7 +34,29 @@ public class ThreadHandler extends Thread {
 			BufferedReader reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
 			String fromClient = new String();
 			boolean play = true;
-			player.setName(reader.readLine());
+
+			
+			String name = new String();
+			name = reader.readLine();
+			boolean playerExists = false;
+			for(Player p : playerList)
+			{
+				if (p.getName().trim().equals(name))
+					{
+						this.player = p;
+						playerExists = true;
+						break;
+					}
+			} 
+			if(!playerExists)
+			{
+				this.player = new Player(1, 1, id, this.maze);
+				this.player.setName(name);
+			}
+			playerList.add(this.player);
+			player.setName(name);
+			
+			
 			while(wait.get())
 				{
 					writer.println(Boolean.toString(wait.get()));
