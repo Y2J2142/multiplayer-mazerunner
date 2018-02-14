@@ -55,7 +55,12 @@ public class Server {
 						maze.makeExits(config.getNumberOfExits());
 						wait.set(true);
 						position.set(0);
-						playerList.clear();
+						points.set(config.getNumberOfExits());
+						for(Player p : playerList)
+						{
+							p.setMaze(maze);
+							p.setStart();
+						}
 					}
 				}
 				
