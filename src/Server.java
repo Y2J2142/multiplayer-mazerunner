@@ -49,6 +49,12 @@ public class Server {
 					points.decrementAndGet();
 					if(maze.getExitSize() == 0)
 					{
+						try
+						{
+							Thread.sleep(200);
+						}
+						catch(InterruptedException e) {e.printStackTrace();}
+
 						System.out.println("Server reset");
 						maze = new Maze(config.getRows(),config.getCols());
 						maze.makePath(1,1);
