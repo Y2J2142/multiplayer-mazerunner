@@ -53,8 +53,12 @@ public class FxClient extends Application {
             Socket socket = new Socket(config.getIP(), config.getPort());
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             out = new PrintWriter(socket.getOutputStream(), true);
+            
+            
             Scanner scn = new Scanner(System.in);
             out.println(scn.nextLine());
+            
+            
             StackPane stack = new StackPane();
             canvas = new Canvas(cols*size,rows*size);
             canvas.setFocusTraversable(true);
@@ -108,14 +112,7 @@ public class FxClient extends Application {
                 fromServer = in.readLine();
                 if(fromServer.equals("end"))
                 {
-                    
-                    
-                    canvas.setOnKeyPressed(null);
-                    gc.clearRect(0,0,canvas.getHeight(),canvas.getWidth());
-                    String position = new String();
-                    position = in.readLine();
-                    gc.fillText("You placed : " + position, canvas.getHeight()/2, canvas.getWidth()/2);
-                    socket.close();
+                    readEndGame(in, canvas, socket);
                     return;
                 }
                 for (int j = 0; j < fromServer.length(); j++) {
